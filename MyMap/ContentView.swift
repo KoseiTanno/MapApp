@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    //  入力中の文字を保持
     @State var inputText: String = ""
+    
+    //  検索キーワードを保持
     @State var displaySearchKey: String = "東京駅"
     @State var displayMapType : MapType = .standard
     var body: some View {
         VStack {
             TextField("キーワード", text: $inputText, prompt: Text("キーワードを入力してください"))
+                //  入力が完了した時
                 .onSubmit {
                     displaySearchKey = inputText
                 }
@@ -22,6 +26,7 @@ struct ContentView: View {
             ZStack(alignment: .bottomTrailing) {
                 MapView(searchKey: displaySearchKey, mapType: displayMapType)
                 
+                //  マップ種類切り替えボタン
                 Button {
                     if displayMapType == .standard {
                         displayMapType = .satellite
